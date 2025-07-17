@@ -7,6 +7,7 @@ import FavProducts from "./components/home-components/FavProducts";
 import BottomSlider from "./components/home-components/BottomSlider";
 import CallToAction from "./components/home-components/CallToAction";
 import Footer from "./layout/Footer";
+import FeaturedPosts from "./components/home-components/FeaturedPosts";
 function App() {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App() {
       <FavProducts />
       <BottomSlider />
       <CallToAction />
+      <FeaturedPosts />
       <Footer />
       {/* Route içerikleri - HomePage ve diğerleri kaldırıldı, şimdilik sadece Header ve Slider görünür olacak */}
       <Switch>

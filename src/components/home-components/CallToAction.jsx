@@ -35,16 +35,14 @@ const CallToAction = () => {
           We know how large objects will act, but things on a small scale.
         </p>
         {/* CTA butonları */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-2 md:w-[339px] w-full justify-center md:justify-start">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-[25px] md:gap-[10px] w-[165px] md:w-[339px] h-[129px] md:h-[52px]">
           <button
-            className="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.2px] bg-[#2DC071] text-white rounded-[5px] px-10 py-3 md:w-[151px] md:h-[52px] w-full md:w-auto transition hover:bg-[#27a15e]"
+            className="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.2px] text-white rounded-[5px] px-[40px] py-[15px] w-[151px] h-[52px] bg-[#23A6F0] md:bg-[#2DC071] transition hover:bg-[#1e8bd4] md:hover:bg-[#27a15e]"
           >
             BUY NOW
           </button>
           <button
-            className="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.2px] border border-[#2DC071] text-[#2DC071] rounded-[5px] px-10 py-3 md:w-[171px] md:h-[52px] w-full md:w-auto transition hover:bg-[#f0fff7]"
-          >
-            READ MORE
+            className="font-montserrat font-bold text-[14px] leading-[22px] tracking-[0.2px] text-[#23A6F0] md:text-[#2DC071] border border-[#23A6F0] md:border-[#2DC071] rounded-[5px] px-[40px] py-[15px] w-[165px] md:w-[171px] h-[52px] transition hover:bg-[#f0fff7] text-ellipsis whitespace-nowrap overflow-hidden"><span className="block md:hidden">Learn More</span><span className="hidden md:block">READ MORE</span>
           </button>
         </div>
       </div>
