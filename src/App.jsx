@@ -4,6 +4,9 @@ import Header from "./layout/Header"; // Header bileşenini buradan import ettik
 import Slider from "./components/home-components/HeroSlider";
 import CategoryPick from "./components/home-components/CategoryPick";
 import FavProducts from "./components/home-components/FavProducts";
+import BottomSlider from "./components/home-components/BottomSlider";
+import CallToAction from "./components/home-components/CallToAction";
+import Footer from "./layout/Footer";
 function App() {
   return (
     <Router>
@@ -12,6 +15,9 @@ function App() {
       <Slider />
       <CategoryPick />
       <FavProducts />
+      <BottomSlider />
+      <CallToAction />
+      <Footer />
       {/* Route içerikleri - HomePage ve diğerleri kaldırıldı, şimdilik sadece Header ve Slider görünür olacak */}
       <Switch>
         {/* Buraya ileride farklı sayfalarınız için rotalar ekleyebilirsiniz. */}
