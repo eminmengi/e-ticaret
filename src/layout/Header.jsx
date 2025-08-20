@@ -11,19 +11,14 @@ import {
 } from "lucide-react";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
   const location = useLocation();
-
   return (
     <header className="z-50 relative">
       <div className="hidden md:flex flex-row flex-wrap gap-10 items-center justify-between md:bg-[#252B42] px-10 py-5 text-white text-sm font-bold font-[Montserrat]">
@@ -46,7 +41,6 @@ export default function Header() {
           >
             <FaInstagram className="text-xl" />
           </a>
-
           <a
             href="https://www.youtube.com/"
             target="_blank"
@@ -54,7 +48,6 @@ export default function Header() {
           >
             <FaYoutube className="text-xl" />
           </a>
-
           <a
             href="https://www.facebook.com/"
             target="_blank"
@@ -62,13 +55,11 @@ export default function Header() {
           >
             <FaFacebook className="text-xl" />
           </a>
-
           <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
             <FaXTwitter className="text-xl" />
           </a>
         </div>
       </div>
-
       <div className="flex flex-wrap justify-between items-center gap-5 px-10 py-5 shadow-md">
         <Link
           className="font-[Montserrat] text-2xl font-bold text-[#252B42]"
@@ -96,7 +87,6 @@ export default function Header() {
             >
               Shop
             </Link>
-
             {isOpen ? (
               <ChevronUp onClick={toggleMenu} className="cursor-pointer" />
             ) : (
@@ -197,10 +187,8 @@ export default function Header() {
               </div>
             )}
           </div>
-
           <Link
             to="/about"
-            
             onClick={() => setIsOpen(false)}
             className={`${
               location.pathname === "/about" ? "font-normal" : "font-bold"
@@ -208,7 +196,6 @@ export default function Header() {
           >
             About
           </Link>
-          
           <Link
             to="/contact"
             onClick={() => setIsOpen(false)}
@@ -220,7 +207,6 @@ export default function Header() {
           </Link>
           <Link
             to="/pricing"
-           
             onClick={() => setIsOpen(false)}
             className={`${
               location.pathname === "/pricing" ? "font-normal" : "font-bold"
@@ -280,10 +266,8 @@ export default function Header() {
           >
             Product
           </Link>
-
           <Link
             to="/about"
-            
             onClick={() => setIsOpen(false)}
             className={`${
               location.pathname === "/about" ? "font-normal" : "font-bold"
@@ -291,7 +275,6 @@ export default function Header() {
           >
             About
           </Link>
-          
           <Link
             to="/contact"
             onClick={() => setIsOpen(false)}
@@ -303,7 +286,6 @@ export default function Header() {
           </Link>
           <Link
             to="/pricing"
-           
             onClick={() => setIsOpen(false)}
             className={`${
               location.pathname === "/pricing" ? "font-normal" : "font-bold"
