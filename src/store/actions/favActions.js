@@ -1,5 +1,6 @@
 import { FAV_ADD, FAV_REMOVE, FAV_TOGGLE, FAV_CLEAR } from "../actionTypes";
 
+
 export const addFavorite = (product) => ({ type: FAV_ADD, payload: product });
 export const removeFavorite = (productId) => ({
   type: FAV_REMOVE,

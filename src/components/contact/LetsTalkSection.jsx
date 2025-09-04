@@ -1,10 +1,10 @@
-import { ArrowBigDownDash } from "lucide-react";
+import { Redo } from "lucide-react";
 
 export default function LetsTalkSection() {
   return (
     <section className="flex flex-col items-center justify-center text-center pt-5 pb-15 gap-4 font-[Montserrat]">
       
-      <ArrowBigDownDash className="text-[#00AEEF] animate-bounce" size={75} />
+      <Redo className="text-[#00AEEF] animate-bounce rotate-60" size={75} />
 
       <p className="uppercase text-sm font-semibold text-[#252B42]">
         We can’t wait to meet you

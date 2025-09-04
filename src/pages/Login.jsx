@@ -1,3 +1,4 @@
+// src/pages/Login.jsx
 import { useForm } from "react-hook-form";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,31 +42,32 @@ export default function Login() {
       });
   };
 
-  
-
   return (
-    <main className="w-[90vw] md:w-[50vw] mx-auto my-20 flex flex-col gap-5 font-[Montserrat] text-[#252B42]">
-      <div>
-        <h1 className="text-center text-4xl font-bold">Login</h1>
-        <p className="text-center">
+    <main className="w-[95%] md:w-[60%] lg:w-[35%] mx-auto my-16 p-8 bg-white shadow-xl rounded-2xl font-[Montserrat] text-gray-800">
+      {/* Başlık */}
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
+          Welcome Back
+        </h1>
+        <p className="mt-2 text-gray-600">
           Don&apos;t have an account?{" "}
-          <Link to="/register" className="text-[#23A6F0]">
+          <Link to="/register" className="text-blue-500 hover:underline font-semibold">
             Register
           </Link>
         </p>
       </div>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-5 text-lg w-[90vw] md:w-[45vw] mx-auto"
-      >
+      {/* Form */}
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 text-base">
         {/* Email */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="email">Email*</label>
+        <div>
+          <label htmlFor="email" className="block font-medium text-gray-700 mb-1">
+            Email*
+          </label>
           <input
             id="email"
             type="email"
-            placeholder="Enter a valid email"
+            placeholder="Enter your email"
             {...register("email", {
               required: "Email is required",
               pattern: {
@@ -73,16 +75,16 @@ export default function Login() {
                 message: "Invalid email address",
               },
             })}
-            className="border border-[#E6E6E6] p-1 rounded text-base"
+            className="w-full border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none"
           />
-          {errors.email && (
-            <p className="text-red-500">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
         </div>
 
         {/* Password */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="password">Password*</label>
+        <div>
+          <label htmlFor="password" className="block font-medium text-gray-700 mb-1">
+            Password*
+          </label>
           <input
             id="password"
             type="password"
@@ -90,26 +92,25 @@ export default function Login() {
             {...register("password", {
               required: "Password is required",
             })}
-            className="border border-[#E6E6E6] p-1 rounded text-base"
+            className="w-full border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none"
           />
-          {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
-          )}
+          {errors.password && <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>}
         </div>
 
         {/* Remember me */}
-        <label className="flex items-center gap-2 text-base">
-          <input type="checkbox" {...register("remember")} />
+        <label className="flex items-center gap-2 text-sm text-gray-700">
+          <input type="checkbox" {...register("remember")} className="w-4 h-4" />
           <span>Remember me</span>
         </label>
 
+        {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting || status === "loading"}
-          className="bg-[#23A6F0] text-white font-bold py-2 rounded flex justify-center items-center w-full md:w-[15vw] mx-auto cursor-pointer hover:bg-[#2497da]"
+          className="mt-4 bg-blue-500 text-white font-semibold py-3 rounded-lg w-full flex justify-center items-center hover:bg-blue-600 transition disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isSubmitting || status === "loading" ? (
-            <CircularProgress size={20} />
+            <CircularProgress size={24} className="text-white" />
           ) : (
             "Login"
           )}

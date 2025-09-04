@@ -84,7 +84,7 @@ export default function Header() {
   const token =
     useSelector((s) => s.user?.token) || localStorage.getItem("token");
   const isAuthed = Boolean(user || token);
-  const emailForAvatar = user?.email || "someone@example.com";
+  const emailForAvatar = user?.email || "barış";
   const emailToShow = user?.email || "";
 
   const categories = useSelector((s) => s.category?.items || []);
