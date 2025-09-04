@@ -14,6 +14,7 @@ import Profile from "../pages/Profile";
 import AddAddressPage from "../pages/AddAdressPage";
 import CheckoutPaymentPage from "../pages/CheckoutPaymentPage";
 import OrdersPage from "../pages/OrdersPage";
+import TeamPage from "../pages/TeamPage";
 
 export default function PageContent() {
   return (
@@ -59,6 +60,9 @@ export default function PageContent() {
       </Route>
       <Route path="/pricing">
         <PricingPage />
+      </Route>
+      <Route path="/team">
+        <TeamPage />
       </Route>
     </Switch>
   );

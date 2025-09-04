@@ -1,8 +1,7 @@
 import team from "../../data/team";
-
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-
 import { FaXTwitter } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Team() {
   return (
@@ -18,7 +17,7 @@ export default function Team() {
         </p>
       </div>
       <div className="flex flex-col items-center justify-center gap-10 md:flex-row ">
-        {team.map((member) => (
+        {team.slice(0, 3).map((member) => (
           <div key={member.id} className="flex flex-col justify-center items-center gap-3">
             <img src={member.imgUrl} className="w-full md:w-[30vw] mb-5" />
             <p className="text-[#252B42] font-bold">{member.name}</p>
@@ -52,6 +51,14 @@ export default function Team() {
           </div>
         ))}
       </div>
+        <div className="mt-10">
+          <Link
+            to="/team"
+            className="px-6 py-3 bg-[#23A6F0] text-white font-semibold rounded-lg hover:bg-[#252B42] transition"
+          >
+            View All Team
+          </Link>
+        </div>
     </section>
   );
 }

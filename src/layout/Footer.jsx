@@ -81,8 +81,8 @@ export default function Footer() {
       <div className="w-full bg-[#FAFAFA]">
         <div className="max-w-[1050px] mx-auto px-6 py-6 flex items-center justify-center md:justify-start">
           <h6 className="font-bold text-sm md:text-base text-[#737373] text-center md:text-left font-montserrat">
-            <span className="block md:inline">Made With Love By</span>
-            <span className="text-[#252B42] block md:inline md:ml-2"><a href="https://github.com/eminmengi" target="_blank" rel="noopener noreferrer">Emin Mengi</a></span>
+            <span className="block md:inline">Copyright © 2025 by</span>
+            <span className="text-gray-600 block md:inline md:ml-2"><a href="https://github.com/eminmengi" target="_blank" rel="noopener noreferrer">Emin Mengi</a></span>
           </h6>
         </div>
       </div>
