@@ -71,34 +71,3 @@ export const logoutUser = () => (dispatch) => {
   setAuthToken(null);
   dispatch(logout());
 };
-
-export const updateUserProfile = (userData) => async (dispatch, getState) => {
-  try {
-    const token = getState().user?.token || localStorage.getItem("token");
-    if (token) setAuthToken(token);
-
-    const res = await axiosInstance.put("/user/profile", userData);
-    const updatedUser = res.data;
-
-    dispatch(loginSuccess({ user: updatedUser, token }));
-    return updatedUser;
-  } catch (err) {
-    const msg = err?.response?.data?.message || "Update failed";
-    console.error(msg);
-    throw msg;
-  }
-};
-
-export const updateUserPassword = ({ password }) => async (dispatch, getState) => {
-  try {
-    const token = getState().user?.token || localStorage.getItem("token");
-    if (token) setAuthToken(token);
-
-    const res = await axiosInstance.put("/user/password", { password });
-    return res.data;
-  } catch (err) {
-    const msg = err?.response?.data?.message || "Password update failed";
-    console.error(msg);
-    throw msg;
-  }
-};

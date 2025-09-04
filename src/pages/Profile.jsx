@@ -4,7 +4,7 @@ import Gravatar from "react-gravatar";
 import { updateUserProfile, updateUserPassword } from "../store/actions/userActions";
 import { fetchAddresses } from "../store/thunks/addressThunk";
 import { fetchFavorites } from "../store/thunks/favThunks";
-import { fetchOrders } from "../store/thunks/orderThunk";
+import { fetchOrders } from "../store/thunks/ordersThunk";
 
 export default function Profile() {
   const dispatch = useDispatch();

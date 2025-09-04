@@ -61,7 +61,7 @@ export default function cart(state = initialState, action) {
     }
 
     case CART_CLEAR:
-      return initialState;
+      return { ...state, items: [] };
 
     default:
       return state;

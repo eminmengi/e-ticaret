@@ -33,3 +33,19 @@ export const ADDRESS_SET_LIST = "address/ADDRESS_SET_LIST";
 export const ADDRESS_SET_FETCH_STATE = "address/ADDRESS_SET_FETCH_STATE";
 export const ADDRESS_SELECT_SHIPPING = "address/ADDRESS_SELECT_SHIPPING";
 export const ADDRESS_SELECT_BILLING = "address/ADDRESS_SELECT_BILLING";
+
+//CARD
+export const CARD_SET_LIST = "card/CARD_SET_LIST";
+export const CARD_SET_FETCH_STATE = "card/CARD_SET_FETCH_STATE";
+export const CARD_SELECT = "card/CARD_SELECT";
+
+// ORDER
+export const ORDER_SET_ADDRESSES = "order/ORDER_SET_ADDRESSES";
+export const ORDER_SET_ITEMS     = "order/ORDER_SET_ITEMS";
+export const ORDER_SET_SUMMARY   = "order/ORDER_SET_SUMMARY";
+export const ORDER_CLEAR         = "order/ORDER_CLEAR";
+
+// ORDER HISTORY
+export const ORDERHIST_SET_LIST = "orderhist/SET_LIST";
+export const ORDERHIST_SET_FETCH_STATE = "orderhist/SET_FETCH_STATE";
+export const ORDERHIST_SET_ERROR = "orderhist/SET_ERROR";

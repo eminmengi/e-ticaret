@@ -13,7 +13,9 @@ import cart from "./reducers/cartReducer";
 import category from "./reducers/categoryReducer";
 import favorites from "./reducers/favoritesReducers";
 import address from "./reducers/addressReducer";
+import card from "./reducers/cardReducer";
 import orders from "./reducers/ordersReducer";
+import orderHistory from "./reducers/orderHistoryReducer";
 
 const rootReducer = combineReducers({
   client,
@@ -23,7 +25,9 @@ const rootReducer = combineReducers({
   category,
   favorites,
   address,
+  card,
   orders,
+  orderHistory,
 });
 
 

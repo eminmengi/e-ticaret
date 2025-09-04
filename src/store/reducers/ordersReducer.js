@@ -1,15 +1,30 @@
-// src/store/reducers/ordersReducer.js
-const initial = { items: [], error: null };
+import {
+  ORDER_SET_ADDRESSES,
+  ORDER_SET_ITEMS,
+  ORDER_SET_SUMMARY,
+  ORDER_CLEAR,
+} from "../actionTypes";
 
-export default function orders(state = initial, action) {
+const initialState = {
+  shippingId: null,
+  billingId: null,
+  items: [], 
+  summary: { subtotal: 0, shipping: 0, discount: 0, total: 0 },
+};
+
+export default function order(state = initialState, action) {
   switch (action.type) {
-    case "orders/GET_ORDERS_SUCCESS":
-      return { ...state, items: action.payload, error: null };
-    case "orders/GET_ORDERS_FAIL":
-      return { ...state, error: action.payload };
-    case "ORDERS_SET_LIST":
-      return { ...state, items: action.payload };
-    
+    case ORDER_SET_ADDRESSES:
+      return { ...state, ...action.payload };
+    case ORDER_SET_ITEMS:
+      return {
+        ...state,
+        items: Array.isArray(action.payload) ? action.payload : [],
+      };
+    case ORDER_SET_SUMMARY:
+      return { ...state, summary: { ...state.summary, ...action.payload } };
+    case ORDER_CLEAR:
+      return initialState;
     default:
       return state;
   }

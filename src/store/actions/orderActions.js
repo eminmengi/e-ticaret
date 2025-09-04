@@ -1,17 +1,26 @@
-// src/store/actions/orderActions.js
-import axiosInstance from "../../api/axiosInstance";
+import {
+  ORDER_SET_ADDRESSES,
+  ORDER_SET_ITEMS,
+  ORDER_SET_SUMMARY,
+  ORDER_CLEAR,
+} from "../actionTypes";
 
-export const GET_ORDERS_SUCCESS = "orders/GET_ORDERS_SUCCESS";
-export const GET_ORDERS_FAIL = "orders/GET_ORDERS_FAIL";
 
-export const getOrders = () => async (dispatch, getState) => {
-  try {
-    const token = getState().user?.token || localStorage.getItem("token");
-    if (token) axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+export const setOrderAddresses = ({ shippingId, billingId }) => ({
+  type: ORDER_SET_ADDRESSES,
+  payload: { shippingId, billingId },
+});
 
-    const res = await axiosInstance.get("/orders"); // backend endpoint
-    dispatch({ type: GET_ORDERS_SUCCESS, payload: res.data });
-  } catch (err) {
-    dispatch({ type: GET_ORDERS_FAIL, payload: err?.response?.data?.message });
-  }
-};
+
+export const setOrderItems = (items) => ({
+  type: ORDER_SET_ITEMS,
+  payload: items,
+});
+
+
+export const setOrderSummary = (summary) => ({
+  type: ORDER_SET_SUMMARY,
+  payload: summary,
+});
+
+export const clearOrder = () => ({ type: ORDER_CLEAR });
