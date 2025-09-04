@@ -29,7 +29,7 @@ export default function Profile() {
     dispatch(fetchAddresses());
     dispatch(fetchFavorites());
     dispatch(fetchOrders());
-  }, [user]);
+  }, [user, dispatch]);
 
   if (!user && !token) return null;
 
