@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile";
 import AddAddressPage from "../pages/AddAdressPage";
 import CheckoutPaymentPage from "../pages/CheckoutPaymentPage";
+import OrdersPage from "../pages/OrdersPage";
 
 export default function PageContent() {
   return (
@@ -35,6 +36,9 @@ export default function PageContent() {
       <Route path="/cart">
         <CartPage />
       </Route>
+      <ProtectedRoute path="/orders">
+        <OrdersPage />
+      </ProtectedRoute>
       <ProtectedRoute path="/checkout/address/new">
         <AddAddressPage />
       </ProtectedRoute>
