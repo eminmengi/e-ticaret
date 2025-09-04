@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect } from "react-router-dom";
 import Gravatar from "react-gravatar";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Lock, Mail, Eye, EyeOff, Info  } from "lucide-react";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 import { fetchAddresses } from "../store/thunks/addressThunk";
 import { fetchCards } from "../store/thunks/cardThunks";
@@ -131,6 +134,7 @@ export default function ProfilePage() {
 
 function Overview({ cartCount, favCount, orders, setTab }) {
   const lastOrder = (orders?.items || [])[0];
+  const history = useHistory();
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -139,7 +143,7 @@ function Overview({ cartCount, favCount, orders, setTab }) {
         value={cartCount}
         icon={<ShoppingCart size={24} />}
         color="bg-gradient-to-r from-blue-400 to-blue-600"
-        onClick={() => setTab("addresses")}
+        onClick={() => history.push("/cart")}
       />
       <CardStat
         label="Favorites"
@@ -225,13 +229,12 @@ function Favorites({ items }) {
 
 
 
-function Addresses({ items, onManageNew, onManage }) {
+function Addresses({ items, onManageNew }) {
   return (
     <div className="bg-white rounded-xl p-6 shadow space-y-4 mt-4">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-2">
         <h2 className="text-xl font-bold">Saved Addresses</h2>
         <div className="flex gap-2">
-          <button onClick={onManage} className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition">Manage</button>
           <button onClick={onManageNew} className="px-4 py-2 rounded-lg transition bg-gradient-to-r from-blue-300 to-blue-700 text-white shadow">+ Add New</button>
         </div>
       </div>
@@ -303,21 +306,171 @@ function OrdersPreview({ items, onAll }) {
 }
 
 function Security({ email }) {
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  // Şifre politikası
+  const passwordPolicy = {
+    minLength: 8,
+    uppercase: true,
+    number: true,
+    specialChar: true
+  };
+
+  const checkPolicy = (pw) => {
+    return {
+      minLength: pw.length >= passwordPolicy.minLength,
+      uppercase: passwordPolicy.uppercase ? /[A-Z]/.test(pw) : true,
+      number: passwordPolicy.number ? /[0-9]/.test(pw) : true,
+      specialChar: passwordPolicy.specialChar ? /[!@#$%^&*]/.test(pw) : true,
+    };
+  };
+
+  const policy = checkPolicy(newPassword);
+
+  const strength = Object.values(policy).filter(Boolean).length; // 0-4
+  const strengthText = ["Very Weak", "Weak", "Medium", "Strong", "Very Strong"];
+  const strengthColor = ["bg-red-500", "bg-orange-400", "bg-yellow-400", "bg-blue-400", "bg-green-500"];
+
+  const passwordsMatch = newPassword && confirmPassword && newPassword === confirmPassword;
+
+  const canSubmit = currentPassword && newPassword && confirmPassword && passwordsMatch && strength >= 3;
+
+  const handleSubmit = () => {
+    if (!canSubmit) return;
+
+    // Simulate update
+    toast.success("Password updated successfully!");
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+  };
+
   return (
-    <div className="bg-white rounded-xl p-6 shadow mt-4 space-y-4">
-      <h2 className="text-xl font-bold">Security</h2>
-      <p className="text-gray-500 text-sm">Account settings.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="text-sm text-gray-500">Email</label>
-          <input disabled className="mt-1 w-full border border-gray-200 rounded px-3 py-2 bg-gray-50" value={email} readOnly />
+    <div className="bg-white rounded-xl shadow p-6 mt-6 space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center border-b pb-4">
+        <div className="flex items-center gap-2">
+          <Lock className="w-5 h-5 text-blue-600" />
+          <h2 className="text-xl font-semibold">Login & Security</h2>
         </div>
-        <div>
-          <label className="text-sm text-gray-500">New Password</label>
-          <input type="password" className="mt-1 w-full border border-gray-200 rounded px-3 py-2" placeholder="••••••••" />
+        <p className="text-gray-500 text-sm mt-1 sm:mt-0">
+          Update your password and manage account security
+        </p>
+      </div>
+
+      {/* Form */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Email */}
+        <div className="flex flex-col">
+          <label className="text-sm font-medium text-gray-600 flex items-center gap-1">
+            <Mail className="w-4 h-4 text-gray-500" /> Email
+          </label>
+          <input
+            type="email"
+            value={email}
+            disabled
+            readOnly
+            className="mt-2 w-full border border-gray-200 rounded-lg px-3 py-2 bg-gray-100 text-gray-700 cursor-not-allowed"
+          />
+        </div>
+
+        {/* Current Password */}
+        <div className="flex flex-col relative">
+          <label className="text-sm font-medium text-gray-600">Current Password</label>
+          <input
+            type={showCurrent ? "text" : "password"}
+            placeholder="••••••••"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            className="mt-2 w-full border border-gray-200 rounded-lg px-3 py-2 pr-10 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+            onClick={() => setShowCurrent(!showCurrent)}
+          >
+            {showCurrent ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
+        </div>
+
+        {/* New Password */}
+        <div className="flex flex-col relative">
+          <label className="text-sm font-medium text-gray-600 flex items-center gap-1">
+            New Password
+            <Info className="w-4 h-4 text-gray-400 cursor-pointer" title="Password must meet all policy requirements" />
+          </label>
+          <input
+            type={showNew ? "text" : "password"}
+            placeholder="••••••••"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="mt-2 w-full border border-gray-200 rounded-lg px-3 py-2 pr-10 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+            onClick={() => setShowNew(!showNew)}
+          >
+            {showNew ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
+
+          {/* Şifre politikası */}
+          <ul className="mt-2 text-xs space-y-1">
+            <li className={policy.minLength ? "text-green-500" : "text-gray-400"}>• Minimum 8 characters</li>
+            <li className={policy.uppercase ? "text-green-500" : "text-gray-400"}>• At least one uppercase letter</li>
+            <li className={policy.number ? "text-green-500" : "text-gray-400"}>• At least one number</li>
+            <li className={policy.specialChar ? "text-green-500" : "text-gray-400"}>• At least one special character (!@#$%^&*)</li>
+          </ul>
+
+          {/* Güç göstergesi */}
+          {newPassword && (
+            <div className="mt-2">
+              <div className="h-2 w-full bg-gray-200 rounded-full">
+                <div className={`h-2 rounded-full ${strengthColor[strength]} transition-all`} style={{ width: `${(strength / 4) * 100}%` }}></div>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">{strengthText[strength]}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Confirm Password */}
+        <div className="flex flex-col relative">
+          <label className="text-sm font-medium text-gray-600">Confirm New Password</label>
+          <input
+            type={showConfirm ? "text" : "password"}
+            placeholder="••••••••"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="mt-2 w-full border border-gray-200 rounded-lg px-3 py-2 pr-10 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-9 text-gray-500 hover:text-gray-700"
+            onClick={() => setShowConfirm(!showConfirm)}
+          >
+            {showConfirm ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
+          {!passwordsMatch && confirmPassword && (
+            <p className="text-xs text-red-500 mt-1">Passwords do not match</p>
+          )}
         </div>
       </div>
-      <button disabled className="px-4 py-2 rounded cursor-not-allowed bg-gradient-to-r from-blue-300 to-blue-700 text-white shadow">Save & Update</button>
+
+      {/* Action */}
+      <div className="pt-2">
+        <button
+          onClick={handleSubmit}
+          disabled={!canSubmit}
+          className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-blue-400 to-blue-600 text-white font-medium shadow disabled:opacity-50 disabled:cursor-not-allowed transition"
+        >
+          Save & Update
+        </button>
+      </div>
     </div>
   );
 }
