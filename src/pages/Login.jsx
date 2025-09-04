@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useForm } from "react-hook-form";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,7 +46,7 @@ export default function Login() {
       {/* Başlık */}
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
-          Welcome Back
+          Log In
         </h1>
         <p className="mt-2 text-gray-600">
           Don&apos;t have an account?{" "}

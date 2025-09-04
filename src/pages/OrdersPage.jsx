@@ -23,7 +23,7 @@ export default function OrdersPage() {
         <h1 className="text-3xl font-bold">My Orders</h1>
         <button
           onClick={() => dispatch(fetchOrders())}
-          className="text-sm bg-[#23A6F0] text-white font-bold px-4 py-2 rounded hover:bg-[#2497da] cursor-pointer"
+          className="text-sm bg-[#23A6F0 font-bold px-4 py-2 rounded cursor-pointer bg-gradient-to-r from-blue-300 to-blue-700 text-white shadow"
           disabled={loading}
         >
           Refresh
