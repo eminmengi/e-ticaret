@@ -12,6 +12,7 @@ import CheckoutAddressPage from "../pages/CheckoutAddressPage";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile";
 import AddAddressPage from "../pages/AddAdressPage";
+import CheckoutPaymentPage from "../pages/CheckoutPaymentPage";
 
 export default function PageContent() {
   return (
@@ -36,6 +37,9 @@ export default function PageContent() {
       </Route>
       <ProtectedRoute path="/checkout/address/new">
         <AddAddressPage />
+      </ProtectedRoute>
+       <ProtectedRoute path="/checkout/payment">
+        <CheckoutPaymentPage />
       </ProtectedRoute>
       <ProtectedRoute path="/checkout">
          <CheckoutAddressPage />
